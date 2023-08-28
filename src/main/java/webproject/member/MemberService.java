@@ -2,11 +2,18 @@ package webproject.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
+
+import webproject.util.JDBCUtil;
 
 public class MemberService {
 	private HttpServletRequest request;
@@ -59,8 +66,19 @@ public class MemberService {
 		String method = request.getMethod().toLowerCase();
 		if (method.equals("get")) {
 			return path + "login.jsp";
-		} 
-		return null;
+		} else {
+			MemberVO mvo = null;
+			MemberDAO dao = MemberDAO.getInstance();
+			mvo = dao.login(request.getParameter("id"), request.getParameter("pwd"));
+			if (mvo != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("mvo", mvo);
+				return "board?cmd=main";
+			} else {
+				request.setAttribute("message", "아이디 또는 비밀번호를 다시 확인해주세요");
+				return path + "login.jsp";
+			}
+		}
 	}
 
 

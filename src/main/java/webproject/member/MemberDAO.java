@@ -56,4 +56,26 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	public MemberVO login(String id, String pwd) {
+		MemberVO mvo = null;
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select id, name, nick from membertbl where id = ? and pwd = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				mvo = new MemberVO(rs.getString("id"), null, rs.getString("name"), rs.getString("nick"), null, null, null, null);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return mvo;
+	}
 }

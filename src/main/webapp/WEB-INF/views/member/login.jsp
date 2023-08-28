@@ -14,14 +14,14 @@
 			<div class="form-group row">
 				<label for="name" class="col-sm-2 col-form-label">아이디</label>
 				<div class="col-sm-10">
-				<input type="text" name="id" id="id" size="22" class="form-control" maxlength='20'  placeholder="아이디 입력">										
+				<input type="text" name="id" id="id" size="22" class="form-control" maxlength='20'  placeholder="아이디 입력" required="required">										
 				</div>
 			</div>
 			<div style="height:20px"></div>
 			<div class="form-group row">
 				<label for="name" class="col-sm-2 col-form-label">패스워드</label>
 				<div class="col-sm-10">
-				<input type="password" name="pwd" id="pwd" size="22" class="form-control" maxlength='20'  placeholder="패스워드 입력">										
+				<input type="password" name="pwd" id="pwd" size="22" class="form-control" maxlength='20'  placeholder="패스워드 입력" required="required">										
 				</div>
 			</div>				
 			<div style="height:20px"></div>

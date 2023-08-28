@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h3>회원가입 테스트</h3>
-	<form action="member?cmd=register" onsubmit="register()" method="post" name="registerForm">
+	<form action="member?cmd=register" onsubmit="return register()" method="post" name="registerForm">
 		<table>
 			<div class="box-body">
 				<div class="form-group row">
@@ -24,7 +24,7 @@
 							required="required" onkeydown="changeId();">
 						<button type="button" id="checkid" name="checkid"
 							onclick="idcheck();">중복검사</button>&nbsp;<span id="message"></span>
-						<input type="hidden" id="ischeck" name="ischeck" value="1">
+						<input type="hidden" id="ischeck" name="ischeck" value="2">
 				</div>
 				<div style="height: 20px"></div>
 				<div class="form-group row">
@@ -93,8 +93,14 @@ $(document).ready(function(){
  =======================*/
 function register() {
 	let ischeck = $("#ischeck").val();
-	if(ischeck == 1) {
+	if (ischeck == 1) {
+		alert('중복된 아이디 입니다.');
+		$("#id").focus();
+		return false;
+	}
+	else if(ischeck == 2) {
 		alert('아이디 중복을 확인해주세요');	
+		$("#id").focus();
 		return false;
 	}
 	return true;
@@ -127,7 +133,7 @@ function idcheckAfter(data) {
  * 아이디 변경 되었을 때
  =======================*/
  function changeId() {
-	$("#ischeck").val(1);
+	$("#ischeck").val(2);
 	$("#message").html("");
 }
 </script>
