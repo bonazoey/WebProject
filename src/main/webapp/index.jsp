@@ -5,20 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <title>Insert title here</title>
-</head>
+</head><!--  -->
 <body>
-	<div>
-		<h1>Zenstagram</h1>
-		<div id="question" name="question">
-			<h2 id="first">처음이신가요?</h2>
-			<button id="yes" name="yes" onclick="showYesNext();">네</button>
-			<button id="no" name="no" onclick="showNoNext();">아니오</button>
-		</div>
-			<button id="register" name="register" onclick="location.href='member?cmd=register'" style="display: none;">회원가입</button>
-			<button id="login" name="login" onclick="location.href='member?cmd=login'" style="display: none;">로그인</button>
-			<button id="notlogin" name="notlogin" onclick="location.href='board'" style="display: none;">그냥 둘러볼래요..</button>
+<main style="">
+	<div style="text-align: center; margin: 0 auto; padding-top: 300px">
+		<h1 style="text-shadow: 2px 2px 8px #555; color: white; font-weight: bold;">Zenstagram</h1>
+		<div style="height: 10px"></div>
+			<h5 id="first">처음이신가요?</h5>
+			<div style="height: 20px"></div>
+			<div style="hegith: 20px; padding: 20px; width:500px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+				<button class="sbtn" id="yes" name="yes" onclick="showYesNext();">네</button>
+				<button class="sbtn" id="no" name="no" onclick="showNoNext();">아니오</button>
+				<button class="sbtn" id="register" name="register" onclick="location.href='member?cmd=register'" style="display: none;">회원가입</button>
+				<button class="sbtn" id="login" name="login" onclick="location.href='member?cmd=login'" style="display: none;">로그인</button>
+				<button class="sbtn" id="notlogin" name="notlogin" onclick="location.href='board'" style="display: none;">그냥 둘러볼래요..</button>
+			</div>
+	</div>
+</main>
 <script type="text/javascript">
 /*=============================================
 * ready fun
@@ -37,8 +43,8 @@ $(document).ready(function(){
 		$("#no").css("display", "none");
 		$("#first").css("display", "none");
 		
-		$("#login").css("display", "block");
-		$("#notlogin").css("display", "block");
+		$("#login").css("display", "inline-block");
+		$("#notlogin").css("display", "inline-block");
 	}
 /*=======================================
 * '네' 선택
@@ -48,8 +54,8 @@ $(document).ready(function(){
 		$("#no").css("display", "none");
 		$("#first").css("display", "none");
 		
-		$("#register").css("display", "block");
-		$("#notlogin").css("display", "block");
+		$("#register").css("display", "inline-block");
+		$("#notlogin").css("display", "inline-block");
 	}
 </script>
 </body>

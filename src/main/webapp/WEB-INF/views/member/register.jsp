@@ -4,29 +4,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>지금 당장 일원이 되어 exclusive한 모든 혜택을 누리세요!</title>
+<title>Zenstagram : 회원가입</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js" defer></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js" defer>
+	</script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+	<style>
+	form {
+		text-align: left;
+		width: 300px;
+		padding-left: 80px;
+		padding-top: 80px;
+		padding-bottom: 50px;
+		border: 1px none;
+		border-radius: 50px;
+		box-shadow: 0px 0px 20px 20px #ccc;
+		/*  */
+	}
+	</style>
 </head>
 <body>
-	<h3>회원가입 테스트</h3>
+<main>
+<div style="padding-top: 100px"></div>
+<h1 style="text-shadow: 2px 2px 8px #555; color: white; font-weight: bold;">Zenstagram</h1>
+<div style="height: 20px"></div>
+	<h3>회원가입</h3>
+	<div style="height: 20px"></div>
+	<small>지금 당장 일원이 되어 exclusive한 모든 혜택을 누리세요!</small>
+	<div style="height: 50px"></div>
 	<form action="member?cmd=register" onsubmit="return register()" method="post" name="registerForm">
 		<table>
 			<div class="box-body">
 				<div class="form-group row">
-				<small> * 표시된 항목은 필수 입력 항목입니다.<br><br></small>
+				<small style="color: #999"> * 표시된 항목은 필수 입력 항목입니다.<br><br></small>
 					<label for="name" class="col-sm-2 col-form-label">아이디 *</label>
 					<div class="col-sm-10">
 						<input type="text" name="id" id="id" size="22"
 							class="form-control" maxlength='20' placeholder="아이디 입력"
 							required="required" onkeydown="changeId();">
 						<button type="button" id="checkid" name="checkid"
-							onclick="idcheck();">중복검사</button>&nbsp;<span id="message"></span>
+							onclick="idcheck();" class="sbtn">중복검사</button>&nbsp;<div id="message"style="color: #aaa; font-size: 12px">&nbsp;</div>
 						<input type="hidden" id="ischeck" name="ischeck" value="2">
 				</div>
-				<div style="height: 20px"></div>
+				<div style="height: 8px"></div>
 				<div class="form-group row">
 					<label for="name" class="col-sm-2 col-form-label">패스워드 *</label>
 					<div class="col-sm-10">
@@ -67,16 +89,17 @@
 							class="form-control" maxlength='20' placeholder="연락처 입력" required="required">
 					</div>
 				</div>
-				<div style="height: 20px"></div>
-				<div class="form-group text-center">
-					<button type="submit" class="btn btn-primary">회원가입</button>
-					<button type="button" class="btn btn-danger"
-						onclick="location.href='index.html'">취 소</button>
+				<div style="height: 20px; "></div>
+				<div class="form-group text-center" style="margin: 0 auto; padding-left: 30px;">
+					<button type="submit" class="btn btn-primary sbtn">회원가입</button>
+					<button type="button" class="btn btn-danger sbtn"
+						onclick="location.href='index.jsp'">취 소</button>
 				</div>
 				<div style="height: 20px;"></div>
 			</div>
 		</table>
 	</form>
+	</main>
 	</body>
 <script>
 /*=============================================
@@ -134,7 +157,7 @@ function idcheckAfter(data) {
  =======================*/
  function changeId() {
 	$("#ischeck").val(2);
-	$("#message").html("");
+	$("#message").html("&nbsp;");
 }
 </script>
 </html>

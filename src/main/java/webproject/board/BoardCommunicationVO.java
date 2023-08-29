@@ -1,7 +1,7 @@
 package webproject.board;
 
 import java.sql.Date;
-
+//
 public class BoardCommunicationVO {
 	private int lno, bno, cno, ccno;
 	private String id, heart, cmt;
@@ -19,6 +19,17 @@ public class BoardCommunicationVO {
 		this.ccno = ccno;
 		this.id = id;
 		this.heart = heart;
+		this.cmt = cmt;
+		this.regdate = regdate;
+	}
+
+
+
+	public BoardCommunicationVO(int bno, int cno, String id, String cmt, Date regdate) {
+		super();
+		this.bno = bno;
+		this.cno = cno;
+		this.id = id;
 		this.cmt = cmt;
 		this.regdate = regdate;
 	}

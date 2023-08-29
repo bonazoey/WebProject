@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import webproject.util.JDBCUtil;
-
+//
 public class BoardCommunicationDAO {
 	private static BoardCommunicationDAO dao = new BoardCommunicationDAO();
 
@@ -90,5 +92,36 @@ public class BoardCommunicationDAO {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
 		return result;
+	}
+	
+	// 해당 게시물 댓글 가져오기
+	public List<BoardCommunicationVO> getBoardCmt(int page, int bno, int displayRow) 	{
+		List<BoardCommunicationVO> list=null;
+		StringBuilder sb=new StringBuilder();
+		sb.append("select * from (");
+		sb.append("select rownum rn, A.* from ");
+		sb.append("(select * from boardcmt where bno=? order by bno desc) A ");
+		sb.append(" where rownum<=?");
+		sb.append(") where rn>=?");
+		Connection conn=JDBCUtil.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, page*displayRow);
+			pstmt.setInt(3, page*displayRow-displayRow+1);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				list=new ArrayList<>();
+				do {
+					list.add(new BoardCommunicationVO(rs.getInt("cno"), rs.getInt("bno"),rs.getString("id") , rs.getString("cmt"), rs.getDate("regdate")));
+				}while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }

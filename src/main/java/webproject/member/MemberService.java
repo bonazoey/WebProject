@@ -19,7 +19,7 @@ public class MemberService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private final String path = "/WEB-INF/views/member/";
-
+	//
 	
 
 	public MemberService(HttpServletRequest request, HttpServletResponse response) {
@@ -39,8 +39,18 @@ public class MemberService {
 			return MemberLoginService();
 		} else if (cmd.equals("idcheck")) {
 			MemberidcheckService();
+		} else if (cmd.equals("logout")) {
+			return MemberLogoutService();
 		} 
 		return null;
+	}
+
+
+	private String MemberLogoutService() {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "index.jsp";
+
 	}
 
 

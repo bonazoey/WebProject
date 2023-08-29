@@ -3,9 +3,9 @@ public class PageVO {
    //page 나누기 정보를 담을 객체
     private int page =1; //현재 페이지 (get)
     private int totalCount; //row 전체의 수 (get)
-    private int displayRow =5;  //한 페이지에 몇 개의 로우 (선택 set)
+    private int displayRow;  //한 페이지에 몇 개의 로우 (선택 set)
     private int displayPage =5;  //한 페이지에 몇 개의 페이지 (선택 set)
-    
+    //
     // 검색어 저장
     private String searchword;
     private String searchtype;

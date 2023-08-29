@@ -2,17 +2,20 @@ package webproject.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import webproject.util.JDBCUtil;
 
 public class BoardDAO {
 	private static BoardDAO dao = new BoardDAO();
-	
+
 	private BoardDAO() {
-		
+
 	}
-	
+
 	public static BoardDAO getinstance() {
 		return dao;
 	}
@@ -45,5 +48,172 @@ public class BoardDAO {
 		}
 		return 0;
 	}
+
+	public int getRowCount() {
+		int result = 0;
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from boardtbl";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+	//
+	// 모든 최신 게시물
+	public List<BoardVO> getBoardList(int page, int displayRow) {
+	    List<BoardVO> list = new ArrayList<>();
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("SELECT * FROM (");
+	    sb.append("SELECT ROWNUM rn, A.* FROM ");
+	    sb.append("(SELECT * FROM boardtbl ORDER BY bno DESC) A ");
+	    sb.append("WHERE ROWNUM <= ?");
+	    sb.append(") WHERE rn >= ?");
+	    
+	    try (Connection conn = JDBCUtil.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sb.toString())) {
+	        
+	        pstmt.setInt(1, page * displayRow);
+	        pstmt.setInt(2, page * displayRow - displayRow + 1);
+	        
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                list.add(new BoardVO(
+	                    rs.getInt("bno"), 
+	                    rs.getString("id"), 
+	                    rs.getDate("regdate"), 
+	                    rs.getString("content"), 
+	                   
+	                    rs.getString("srcfilename"), 
+	                    rs.getString("savefilename"), 
+	                    rs.getString("savepath"), 
+	                    rs.getString("tag"), 
+	                    rs.getString("disp")
+	                ));
+	                System.out.println("몇개?");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // 예외 처리: 원하는 방식으로 처리
+	    }
+	    return list;
+	}
+//	public List<BoardVO> getBoardList(int page, int displayRow) 	{
+//		List<BoardVO> list=null;
+//		StringBuilder sb=new StringBuilder();
+//		sb.append("select * from (");
+//		sb.append("select rownum rn, A.* from ");
+//		sb.append("(select * from boardtbl order by bno desc) A ");
+//		sb.append(" where rownum<=?");
+//		sb.append(") where rn>=?");
+//		Connection conn=JDBCUtil.getConnection();
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		try {
+//			pstmt=conn.prepareStatement(sb.toString());
+////			pstmt.setInt(1, bno);
+//			pstmt.setInt(1, page*displayRow);
+//			pstmt.setInt(2, page*displayRow-displayRow+1);
+//			rs=pstmt.executeQuery();
+//			if(rs.next()) {
+//				list=new ArrayList<>();
+//				do {
+//					list.add(new BoardVO(rs.getInt("bno"), rs.getString("id"), rs.getDate("regdate") , rs.getString("content"), rs.getString("srcfilename"), rs.getString("savefilename"), rs.getString("savepath"), rs.getString("tag"), rs.getString("disp")));
+//				} while(rs.next());
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} 
+//		return list;
+//	}
 	
+	// 태그 검색 최신 게시물
+	public List<BoardVO> getBoardList(int page, int displayRow, String tag) {
+		List<BoardVO> list = null;
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
+		sb.append("select * from (");
+		sb.append("select rownum rn, A.* from");
+		sb.append("(select bno, id, regdate, content, savefilename, savepath, tag from boardtbl");
+		sb.append(" where disp = 'y' and ");
+		sb.append(tag);
+		sb.append(" like ? order by bno desc) A");// 최신순 정렬
+		sb.append(" where rownum<=?");
+		sb.append(") where rn>=?");
+		System.out.println(sb.toString());
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, "%" + tag + "%");
+			pstmt.setInt(2, page * displayRow);
+			pstmt.setInt(3, page * displayRow - displayRow + 1);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {// 검색된 행이 하나이상이면
+				list = new ArrayList<>();
+				do {
+					list.add(new BoardVO(rs.getInt("bno"), rs.getString("id"), rs.getDate("regdate") , rs.getString("content"), rs.getString("srcfilename"), rs.getString("savefilename"), rs.getString("savepath"), rs.getString("tag"), rs.getString("disp")));
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	// 페이지용 모든 행 개수
+	public int getRowConut() {
+		int result = 0;
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from boardtbl where disp = 'y'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
+	// 태그 검색 모든 행 개수
+	public int getRowConut(String  tag) {
+		int result = 0;
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		// select count(*) from booktbl where title like '%자유%'
+		String sql = "select count(*) from boardtbl where disp = 'y' and tag like ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + tag + "%");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return result;
+	}
 }
