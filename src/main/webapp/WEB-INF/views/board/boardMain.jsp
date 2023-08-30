@@ -11,6 +11,12 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 	padding: 20px 0 20px 0;
+	transition: 0.2s;
+}
+
+.feed:hover {
+	box-shadow: 0 0 25px 10px #ccc;
+	transition: 0.2s;
 }
 
 #div_NewPage {
@@ -35,7 +41,7 @@ main {
 }
 </style>
 <main>
-	<h3 style="margin-top: 100px;">최근 게시물</h3>
+	<h3 style="margin-top: 100px;"></h3>
 	<div id="div_NewPage">
 		<c:forEach items="${list}" var="post" varStatus="sts">
 			<div class="feed">
@@ -96,6 +102,13 @@ main {
 </main>
 <script type="text/javascript">
 /*=============================================
+ * ready fun 호출
+ *=============================================*/
+$(document).ready(function(){
+//	$("#NewPage").val(0);
+	//showMoreNew();
+});
+/*=============================================
  * 좋아요 버튼
  *=============================================*/
 function likey(imageElement) {
@@ -118,15 +131,9 @@ function likey(imageElement) {
  * 댓글 버튼 클릭
  *=============================================*/
  function cmt() {
-	alert('에, 댓글 버튼을 누른 당신!\n\n애석하게도 욕설 및 비방 이슈로 베타버전에선 지원하지 않습니다!')
+	alert('요호호, 댓글 버튼을 누른 당신!\n\n애석하게도 욕설 및 비방 이슈로 베타버전에선 지원하지 않습니다 ^^;;')
 }
-	/*=============================================
-	 * ready fun 호출
-	 *=============================================*/
-	//$(document).ready(function(){
-	//	$("#NewPage").val(0);
-	//	showMoreNew();
-	//});
+
 	/*=============================================
 	 *	댓글 가져오기 수행 ajax : doAjax(url, param, callback)
 	 *	- 보내는 데이터 : bno, page

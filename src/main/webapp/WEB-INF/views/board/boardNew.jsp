@@ -59,7 +59,7 @@ textarea:hover {
 	transition: 0.3s;
 }
 </style>
-<form action="board?cmd=new" method="post" enctype="multipart/form-data" onsubmit="return enterFn()" id="sendForm">
+<form action="board?cmd=new" method="post" enctype="multipart/form-data"  id="sendForm">
 	<table>
 			<tr>
 				<td>
@@ -91,7 +91,7 @@ textarea:hover {
 			<div style="height: 20px;"></div>
 				<p><small id="tags" name="tags"></small></p>
 				<input id="tagcnt" name="tagcnt" type="hidden" value="0">
-				<p id="tagsend" name="tagsend" style="display: block;"></p>
+				<p id="tagsend" name="tagsend" style="display: none;"></p>
 			</td>
 		</tr>
 	</table>

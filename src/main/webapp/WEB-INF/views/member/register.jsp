@@ -81,7 +81,7 @@
 					<label for="name" class="col-sm-2 col-form-label">이메일</label>
 					<div class="col-sm-10">
 						<input type="email" name="email" id="email" size="22"
-							class="form-control" maxlength='20' placeholder="이메일 입력" required="required">
+							class="form-control" maxlength='20' placeholder="이메일 입력">
 					</div>
 				</div>
 				<div style="height: 20px"></div>

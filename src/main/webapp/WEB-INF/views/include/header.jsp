@@ -44,7 +44,7 @@
 				<button type="button" id="register" name="register" class="sbtn float" onclick="location.href='member?cmd=register'" style="right: 20px">회원가입</button>
 			</c:when>
 			<c:otherwise>
-				<p style="font-weight: bold; padding: 10px; text-shadow: 2px 2px 5px #aaa; text-align: right; right: 120px; top: 15px; font-size: 20px;" class="float">${sessionScope.mvo.name}</p>
+				<p style="font-weight: bold; padding: 10px; text-shadow: 2px 2px 5px #aaa; text-align: right; right: 120px; top: 15px; font-size: 20px;" class="float">${sessionScope.mvo.name} (#${sessionScope.mvo.id})</p>
 				<button type="button" id="logout" name="logout" class="sbtn float" onclick="location.href='member?cmd=logout'">로그아웃</button>
 			</c:otherwise>
 		</c:choose>

@@ -184,9 +184,6 @@ public class BoardService {
 		request.setAttribute("clist", clist);
 		request.setAttribute("list", list);
 		request.setAttribute("pVo", pVo);
-		for(BoardVO vo :list) {
-			System.out.println(vo.getBno());
-		}
 		return path + "boardMain.jsp";
 	}
 
