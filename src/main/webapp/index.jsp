@@ -7,12 +7,13 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>Zenstagram</title>
 </head><!--  -->
 <body>
 <main style="">
 	<div style="text-align: center; margin: 0 auto; padding-top: 300px">
 		<h1 style="text-shadow: 2px 2px 8px #555; color: white; font-weight: bold;">Zenstagram</h1>
+		<h5 style="text-shadow: 2px 2px 8px #fff; color: #ccc;">beta</h5>
 		<div style="height: 10px"></div>
 			<h5 id="first">처음이신가요?</h5>
 			<div style="height: 20px"></div>

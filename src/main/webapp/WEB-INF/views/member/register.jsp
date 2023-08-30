@@ -21,7 +21,11 @@
 		border: 1px none;
 		border-radius: 50px;
 		box-shadow: 0px 0px 20px 20px #ccc;
-		/*  */
+		transition: 0.5s;
+	}
+		form:hover {
+		box-shadow: 0px 0px 25px 25px #aaa;
+		transition: 0.5s;
 	}
 	</style>
 </head>
@@ -29,8 +33,8 @@
 <main>
 <div style="padding-top: 100px"></div>
 <h1 style="text-shadow: 2px 2px 8px #555; color: white; font-weight: bold;">Zenstagram</h1>
+<h5 style="text-shadow: 2px 2px 8px #fff; color: #ccc;">beta</h5>
 <div style="height: 20px"></div>
-	<h3>회원가입</h3>
 	<div style="height: 20px"></div>
 	<small>지금 당장 일원이 되어 exclusive한 모든 혜택을 누리세요!</small>
 	<div style="height: 50px"></div>

@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
 <meta charset="UTF-8">
-<title>지금 당장 로그인 하고 도파민을 과도하게 분비시키세요!</title>
+<title>Zenstagram : 로그인</title>
 </head>
 	<style>
 	form {
@@ -17,15 +17,19 @@
 		border: 1px none;
 		border-radius: 50px;
 		box-shadow: 0px 0px 20px 20px #ccc;
-		/*  */
+		transition: 0.5s;
+	}
+	form:hover {
+		box-shadow: 0px 0px 25px 25px #aaa;
+		transition: 0.5s;
 	}
 	</style>
 <body>
 <main>
 <div style="padding-top: 100px"></div>
 <h1 style="text-shadow: 2px 2px 8px #555; color: white; font-weight: bold;">Zenstagram</h1>
+<h5 style="text-shadow: 2px 2px 8px #fff; color: #ccc;">beta</h5>
 <div style="height: 20px"></div>
-<h3>로그인</h3>
 	<div style="height: 20px"></div>
 	<small>지금 당장 로그인하고 도파민을 과도하게 분비시키세요!</small>
 	<div style="height: 50px"></div>
@@ -51,7 +55,7 @@
 				<button type="reset" class="btn btn-danger sbtn" onclick="location.href='index.jsp'">취 소</button>
 			</div>
 			<div style="height: 20px;"></div>
-			<div>${message}</div>
+			<div style="font-size: 12px; margin-left: -30px;">${message}</div>
 		</div>
 	</table>
 </form>

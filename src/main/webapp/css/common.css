@@ -5,6 +5,11 @@
 	color: #555;
 }
 
+body {
+	height: 100%;
+	width: 100%;
+}
+
 main {
 	width: 1000px;
 	height: 1000px;
@@ -37,6 +42,7 @@ a:visited, a:link, a:hover {
 	margin: 0 5px 0 5px;
 	background-color: #fff;
 	cursor: pointer;
+	transition: 0.5s;
 }
 
 .sbtn:hover {
@@ -46,6 +52,7 @@ a:visited, a:link, a:hover {
 	margin: 0 5px 0 5px;
 	background-color: #aaa;
 	cursor: pointer;
+	transition: 0.5s;
 }
 
 .sbtn:active {
@@ -55,4 +62,15 @@ a:visited, a:link, a:hover {
 	margin: 0 5px 0 5px;
 	background-color: #777;
 	cursor: pointer;
+	transition: 0.5s;
 }
+
+.footer {
+	position: fixed;
+	background-color: #ccc;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 80px;
+	bottom: 0px;
+	}

@@ -18,28 +18,34 @@
 	.header {
 	position: fixed;
 	background-color: #ccc;
-	  font-weight: bold;
-	  display: flex;
-	  justify-content: space-between;
-	  align-items: center;
-	  width: 100%;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 80px;
+	top: 0px;
 	}
-	body {
-	margin-top: 0;
-	}/*  */
+	
+	.float {
+	display: inline-block;
+	position: fixed;
+	right: 20px;
+	top: 25px;
+	z-index: 1;
+	float: right;
+	}
 </style>
 </head>
 <body>
-<div class="header">
-	<h1 style="text-shadow: 2px 2px 8px #555; color: white; font-weight: bold; ">Zenstagram</h1>
+<header>
+	<h1 style="text-shadow: 2px 2px 8px #555; color: white; font-weight: bold; line-height: 80px;" class="header">Zenstagram<span style="text-shadow: 2px 2px 8px #555; color: #fff; font-size: 15px; margin: 0;">&nbsp;beta</span></h1>
 		<c:choose>
 			<c:when test="${sessionScope.mvo == null }">
-				<button type="button" id="login" name="login" class="sbtn" onclick="location.href='member?cmd=login'">로 그 인</button>
-				<button type="button" id="register" name="register" class="sbtn" onclick="">회원가입</button>
+				<button type="button" id="login" name="login" class="sbtn float" onclick="location.href='member?cmd=login'" style="right: 100px">로 그 인</button>
+				<button type="button" id="register" name="register" class="sbtn float" onclick="location.href='member?cmd=register'" style="right: 20px">회원가입</button>
 			</c:when>
 			<c:otherwise>
-				<p style="font-weight: bold; height: 20px; padding: 10px; text-shadow: 2px 2px 5px #aaa; justify-content: flex-end; text-align: right;">${sessionScope.mvo.name}</p>
-				<button type="button" id="logout" name="logout" class="sbtn" onclick="location.href='member?cmd=logout'">로그아웃</button>
+				<p style="font-weight: bold; padding: 10px; text-shadow: 2px 2px 5px #aaa; text-align: right; right: 120px; top: 15px; font-size: 20px;" class="float">${sessionScope.mvo.name}</p>
+				<button type="button" id="logout" name="logout" class="sbtn float" onclick="location.href='member?cmd=logout'">로그아웃</button>
 			</c:otherwise>
 		</c:choose>
-</div>
+</header>
